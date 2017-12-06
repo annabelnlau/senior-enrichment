@@ -8,6 +8,7 @@ const Campus = require('./campus')
 
 
 Student.belongsTo(Campus)
+Campus.hasMany(Student)
 
 // Require all the models
 	// Running each model (i.e. table) module (i.e. file) registers each model into our sequelize db

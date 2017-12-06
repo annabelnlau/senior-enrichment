@@ -2,6 +2,7 @@
 
 const Sequelize = require('sequelize')
 const db = require('../index')
+const Student = require('./student')
 
 const Campus = db.define('campus', {
 	name: {
@@ -16,6 +17,7 @@ const Campus = db.define('campus', {
 		type: Sequelize.TEXT
 	}
 })
+
 
 module.exports = Campus
 

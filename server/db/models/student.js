@@ -2,6 +2,7 @@
 
 const Sequelize = require('sequelize')
 const db = require('../index')
+const Campus = require('./campus')
 
 const Student = db.define('student', {
 	firstName: {
@@ -27,8 +28,9 @@ const Student = db.define('student', {
 		type: Sequelize.DECIMAL,
 		allowNull: false,
 		validate: {min: 0.0, max: 4.0}
-	},
-
+	}
 })
+
+Student.belongsTo(Campus)
 
 module.exports = Student
