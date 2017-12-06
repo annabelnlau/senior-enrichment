@@ -3,50 +3,9 @@
 const db = require('../index');
 const Sequelize = require('sequelize')
 
-// const Student = require('./student')
-// const Campus = require('./campus')
+const Student = require('./student')
+const Campus = require('./campus')
 
-const Campus = db.define('campus', {
-	name: {
-		type: Sequelize.STRING,
-		allowNull: false
-	},
-	imageUrl: {
-		type: Sequelize.STRING,
-		defaultValue: 'https://upload.wikimedia.org/wikipedia/commons/2/2b/Jupiter_and_its_shrunken_Great_Red_Spot.jpg'
-	},
-	description: {
-		type: Sequelize.TEXT
-	}
-})
-
-const Student = db.define('student', {
-	firstName: {
-		type: Sequelize.STRING,
-		allowNull: false
-	},
-	lastName: {
-		type: Sequelize.STRING,
-		allowNull: false
-	},
-	name: {
-		type: Sequelize.VIRTUAL,
-		get() {
-			return this.getDataValue('firstName') + ' ' + this.getDataValue('lastName')
-		}
-	},
-	email: {
-		type: Sequelize.STRING,
-		isEmail: true,
-		allowNull: false
-	},
-	gpa: {
-		type: Sequelize.DECIMAL,
-		allowNull: false,
-		validate: {min: 0.0, max: 4.0}
-	},
-
-})
 
 Student.belongsTo(Campus)
 
