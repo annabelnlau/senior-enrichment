@@ -1,5 +1,6 @@
 'use strict'; 
 
+const Sequelize = require('sequelize');
 const express = require('express');
 const path = require('path');
 const volleyball = require('volleyball');
