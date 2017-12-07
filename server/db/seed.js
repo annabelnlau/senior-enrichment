@@ -13,21 +13,21 @@
 //           lastName: "Gerald",
 //           email: "leah@jupiter.edu",
 //           gpa: 4.0,
-//           campusId: 1  
+//           campusId: 1
 //         },
 //         {
 //             firstName: "Lyssa",
 //             lastName: "Stiller",
 //             email: "lyssa@jupiter.edu",
 //             gpa: 3.9,
-//             campusId: 1  
+//             campusId: 1
 //           },
 //           {
 //             firstName: "Jazzy",
 //             lastName: "Jacquelina",
 //             email: "jazzy@jupiter.edu",
 //             gpa: 4.0,
-//             campusId: 2  
+//             campusId: 2
 //           },
 //     ]
 // }
