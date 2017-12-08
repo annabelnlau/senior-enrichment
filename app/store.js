@@ -6,18 +6,15 @@ import thunkMiddleware from 'redux-thunk'; // https://github.com/gaearon/redux-t
 
 export default createStore(rootReducer, applyMiddleware(thunkMiddleware, loggingMiddleware))
 
-//INITIAL STATE
-const initialState = {
-    students: [],
-    campuses: []
-    //will need to add more to this later 
-}
+
 
 //ACTION TYPES
 const GET_STUDENTS = 'GET_STUDENTS'
 const GET_CAMPUSES = 'GET_CAMPUSES'
+//const GET_SELECTED_STUDENT = 'GET_SELECTED_STUDENT'
 
 //ACTION CREATORS
+//function that returns an object with a type and an action
 export function getStudents (students) {
     const action = {type: GET_STUDENTS, students}
     return action
@@ -27,6 +24,11 @@ export function getCampuses (campuses) {
     const action = {type: GET_CAMPUSES, campuses}
     return action
 }
+
+// export function getSelectedStudent (student) {
+//     const action = {type: GET_SELECTED_STUDENT, student}
+//     return action
+// }
 
 //THUNK CREATORS
 
@@ -39,8 +41,23 @@ export function fetchStudents(){
             const action = getStudents(students)
             dispatch(action)
         })
+        .catch(console.error.bind(console))
     }
 }
+
+// export function fetchSelectedStudent(id){
+//     //const student = this.match.params.student
+//     //console.log(student, "STUDENT!!!!")
+//     return function thunk(dispatch) {
+//         return axios.get(`/api/students/${id}`)
+//         .then(res => res.data)
+//         .then(selectedStudent => {
+//             const action = getSelectedStudent(selectedStudent)
+//             dispatch(action)
+//         })
+//         .catch(console.error.bind(console))
+//     }
+// }
 
 export function fetchCampuses(){
     
@@ -51,25 +68,6 @@ export function fetchCampuses(){
             const action = getCampuses(campuses)
             dispatch(action)
         })
-    }
-}
-
-//REDUCER
-
-function reducer (state = initialState, action){
-    switch(action.type){
-
-        case GET_STUDENTS:
-        return Object.assign({}, state, {
-            students: action.students
-        })
-
-        case GET_CAMPUSES:
-        return Object.assign({}, state, {
-            campuses: action.campuses
-        })
-
-        default:
-        return state
+        .catch(console.error.bind(console))
     }
 }

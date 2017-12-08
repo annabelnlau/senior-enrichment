@@ -1,29 +1,52 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import store from '../store'
 import { connect } from 'react-redux'
+import { NavLink } from 'react-router-dom'
 
-function StudentList (props) {
-    
-        return (
-            <div>
-                <h1>Students</h1>
-                <ul className="student-list">
-                    { console.log(props, "PROPS!!!!")
-                        // console.log(props, "PROPS!!!")
-                        // props.students.map(student => {
-                        //     return <li key={student.id}>{student.name}</li>
-                        // })
-                    }
-                </ul>
-            </div>
-        )
+function StudentList(props) {
+    console.log("props inside", props.students)
+
+    return (
+        <div>
+            <h1>Students</h1>
+            <ul>
+                {props.students &&
+                    //"we found the students"
+                    // console.log(props, "PROPS!!!")
+                    props.students.map(student => {
+                        return (
+                            <li key={student.id}>
+                            <NavLink to={`/students/${student.id}`}  activeClassName='active'>
+                            <span>{student.name}</span>
+                            
+                            </NavLink>
+                            </li>
+                        )
+                    })
+
+                }
+            </ul>
+        </div>
+    )
 }
 
-const mapStateToProps = function(state) {
+const mapStateToProps = function (storeState, ownProps) {
+    //console.log('OWNPROPS IN MAPSTATE!!!!', ownProps)
     return {
-        students: state.students
+        students: storeState.students
     }
 }
 
-export default connect(mapStateToProps)(StudentList)
+const mapDispatchToProps = function(dispatch){
+    return {
+        fetchStudentsInComponent: function(){
+            const studentsThunk = fetchStudents()
+            dispatch(studentsThunk)
+        }
+    }
+}
+//for letting a lower component know something specifically like the number 5 or something
+
+const StudentListContainer = connect(mapStateToProps, mapDispatchToProps)(StudentList)
+export default StudentListContainer
