@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import store from '../store'
 import { connect } from 'react-redux'
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 function StudentList(props) {
     console.log("props inside", props.students)
@@ -17,10 +17,11 @@ function StudentList(props) {
                     props.students.map(student => {
                         return (
                             <li key={student.id}>
-                            <NavLink to={`/students/${student.id}`}  activeClassName='active'>
+                            <Link to={`/students/${student.id}`} >
                             <span>{student.name}</span>
                             
-                            </NavLink>
+                            </Link>
+                            
                             </li>
                         )
                     })

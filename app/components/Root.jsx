@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import StudentList from './StudentList';
 import CampusList from './CampusList';
 import SelectedStudent from './SelectedStudent'
+import SelectedCampus from './SelectedCampus'
 import store, { fetchStudents, fetchCampuses } from '../store';
-import { Route, Switch, Redirect, NavLink, withRouter } from 'react-router-dom'
+import { Route, Switch, Redirect, Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 export default class Root extends Component {
@@ -23,12 +24,13 @@ export default class Root extends Component {
     return (
       <div>
         <main>
-          <NavLink to="/"><h1>We are in the app!</h1></NavLink>
-          <NavLink to="/students"><h2>Students</h2></NavLink>
-          <NavLink to="/campuses"><h2>Campuses</h2></NavLink>
+          <Link to="/"><h1>Where in the <strike>world</strike> universe do you want to study?</h1></Link>
+          <Link to="/students"><h2>Students</h2></Link>
+          <Link to="/campuses"><h2>Campuses</h2></Link>
           <Route exact path="/students" component={StudentList} />
           <Route exact path="/campuses" component={CampusList} />
           <Route path="/students/:id" component={SelectedStudent} />
+          <Route path="/campuses/:id" component={SelectedCampus} />
           </main>
       </div>
     )
