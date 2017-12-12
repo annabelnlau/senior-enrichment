@@ -1,12 +1,13 @@
 /* combineReducers is not currently used, but eventually should be for modular code :D */
 import { combineReducers } from 'redux'
-import store, {fetchStudents, fetchCampuses, getSelectedStudent} from '../store';
+import store, {fetchStudents, fetchCampuses, updateStudent, writeStudent, postStudent} from '../store';
 
 
 //INITIAL STATE
 const initialState = {
   students: [],
-  campuses: []
+  campuses: [],
+  newStudentEntry: {}
   //will need to add more to this later 
 }
 
@@ -22,10 +23,15 @@ const rootReducer = function(state = initialState, action) {
         campuses: action.campuses
     })
 
-  //   case "GET_SELECTED_STUDENT":
-  //   return Object.assign({}, state, {
-  //       selectedStudent: action.student
-  //   })
+    case "WRITE_STUDENT":
+    return Object.assign({}, state, {
+        newStudentEntry: action.newStudent
+    })
+    case "UPDATE_STUDENT":
+    return initialState.map(student => {
+      if (+student.id === +action.student.id) return action.student
+      return student
+    })
     default: return state
   }
 };

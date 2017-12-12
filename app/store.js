@@ -11,7 +11,8 @@ export default createStore(rootReducer, applyMiddleware(thunkMiddleware, logging
 //ACTION TYPES
 const GET_STUDENTS = 'GET_STUDENTS'
 const GET_CAMPUSES = 'GET_CAMPUSES'
-//const GET_SELECTED_STUDENT = 'GET_SELECTED_STUDENT'
+const WRITE_STUDENT = 'WRITE_STUDENT'
+const UPDATE_STUDENT = 'UPDATE_STUDENT'
 
 //ACTION CREATORS
 //function that returns an object with a type and an action
@@ -25,10 +26,15 @@ export function getCampuses (campuses) {
     return action
 }
 
-// export function getSelectedStudent (student) {
-//     const action = {type: GET_SELECTED_STUDENT, student}
-//     return action
-// }
+export function writeStudent(newStudent){
+    const action = {type: WRITE_STUDENT, newStudent}
+    return action
+}
+
+export function updateStudentAction(updatedStudent){
+    const action = {type: UPDATE_STUDENT, updatedStudent}
+    return action
+}
 
 //THUNK CREATORS
 
@@ -45,20 +51,6 @@ export function fetchStudents(){
     }
 }
 
-// export function fetchSelectedStudent(id){
-//     //const student = this.match.params.student
-//     //console.log(student, "STUDENT!!!!")
-//     return function thunk(dispatch) {
-//         return axios.get(`/api/students/${id}`)
-//         .then(res => res.data)
-//         .then(selectedStudent => {
-//             const action = getSelectedStudent(selectedStudent)
-//             dispatch(action)
-//         })
-//         .catch(console.error.bind(console))
-//     }
-// }
-
 export function fetchCampuses(){
     
     return function thunk (dispatch) {
@@ -71,3 +63,25 @@ export function fetchCampuses(){
         .catch(console.error.bind(console))
     }
 }
+
+export function postStudent(newStudent){
+    return function thunk (dispatch){
+        return axios.post('api/students', newStudent)
+        .then(res => res.data)
+        .then(newStudent => {
+            const action = writeStudent(newStudent)
+            dispatch(action)
+        })
+        .catch(console.error.bind(console))
+    }
+}
+
+export function updateStudent(id, studentUpdateData){
+    return function (dispatch) {
+        axios.put(`/api/students/${id}`, studentUpdateData)
+            .then(res => res.data)
+            .then(updatedStudent => dispatch(updateStudentAction(updatedStudent)))
+            .catch(console.error.bind(console))
+    }
+}
+

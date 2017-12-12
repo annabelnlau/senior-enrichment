@@ -6,16 +6,15 @@ import SelectedCampus from './SelectedCampus'
 import store, { fetchStudents, fetchCampuses } from '../store';
 import { Route, Switch, Redirect, Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
+import NewStudentEntry from './NewStudentEntry';
 
 export default class Root extends Component {
 
   componentDidMount() {
     const studentsThunk = fetchStudents()
     const campusesThunk = fetchCampuses()
-    //const selectedStudentThunk = fetchSelectedStudent()
     store.dispatch(studentsThunk)
     store.dispatch(campusesThunk)
-    //store.dispatch(selectedStudentThunk)
   }
 
   render() {
@@ -31,6 +30,7 @@ export default class Root extends Component {
           <Route exact path="/campuses" component={CampusList} />
           <Route path="/students/:id" component={SelectedStudent} />
           <Route path="/campuses/:id" component={SelectedCampus} />
+          <Route path="/" component={NewStudentEntry}/>
           </main>
       </div>
     )

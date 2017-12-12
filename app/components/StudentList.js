@@ -10,6 +10,7 @@ function StudentList(props) {
     return (
         <div>
             <h1>Students</h1>
+    
             <ul>
                 {props.students &&
                     //"we found the students"
@@ -21,13 +22,13 @@ function StudentList(props) {
                             <span>{student.name}</span>
                             
                             </Link>
-                            
                             </li>
                         )
                     })
-
+                    
                 }
             </ul>
+            {<Link to="/add-student/"><button>Add a new student</button></Link>}
         </div>
     )
 }

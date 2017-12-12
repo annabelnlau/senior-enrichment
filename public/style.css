@@ -4,6 +4,6 @@ body {
     flex-wrap: wrap;
     align-content: center;
     font-family: arial,sans-serif;
-    background-image: gainsboro;
-    color: gray;
+    background-color: gainsboro;
+    color: black;
   }
